@@ -2,6 +2,7 @@ package lsg.bags;
 
 import lsg.armor.BlackWitchVeil;
 import lsg.armor.DragonSlayerLeggings;
+import lsg.bags.Collectible;
 
 import java.util.HashSet;
 
@@ -15,7 +16,7 @@ public class Bag {
 
     public Bag() {
 
-        items = new HashSet<>();
+        items = new HashSet<Collectible>();
 
     }
 
@@ -61,7 +62,7 @@ public class Bag {
         return items.contains(item);
     }
 
-    public Collectible[] getItems() {
+    public Colleéctible[] getItems() {
         return items.toArray(new Collectible[items.size()]);
     }
 
@@ -95,7 +96,7 @@ public class Bag {
 
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
 
         BlackWitchVeil blackWitchVeil= new BlackWitchVeil();
 
@@ -108,6 +109,6 @@ public class Bag {
         mediumBag.pop(blackWitchVeil);
         System.out.println(mediumBag.toString());
 
-    }*/
+    }
 
 }
