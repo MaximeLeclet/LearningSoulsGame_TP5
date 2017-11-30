@@ -1,5 +1,6 @@
 package lsg.characters;
 
+import lsg.bags.*;
 import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
 import lsg.consumables.food.Food;
@@ -24,10 +25,12 @@ public abstract class Character {
     private Dice dice;
     private Weapon weapon;
     private Consumable consumable;
+    private Bag bag;
 
     public Character() {
 
         dice = new Dice(101);
+        bag = new SmallBag();
 
     }
 
@@ -194,6 +197,88 @@ public abstract class Character {
 
         System.out.println(name + " repairs " + weapon.toString() + " with " + kit.toString());
         weapon.repairWith(kit);
+
+    }
+
+    public void pickUp(Collectible item) {
+
+        System.out.println(name + " picks up " + weapon.toString());
+        bag.push(item);
+
+    }
+
+    public Collectible pullOut(Collectible item) {
+
+        Collectible itemToPull = null;
+
+        if(bag.contains(item)) {
+
+            System.out.println(name + " pulls out " + item);
+            itemToPull = bag.pop(item);
+
+        }
+
+        return itemToPull;
+
+    }
+
+    public void printBag() {
+
+        System.out.println("BAG : " + bag);
+
+    }
+
+    public int getBagCapacity() {
+
+        return bag.getCapacity();
+
+    }
+
+    public int getBagWeight() {
+
+        return bag.getCapacity() - bag.getWeight();
+
+    }
+
+    public Collectible[] getBagItems() {
+
+        return bag.getItems();
+
+    }
+
+    public Bag setBag(Bag bag) {
+
+        System.out.println(name + " changes " + this.bag.getClass().getSimpleName() + " for " + bag.getClass().getSimpleName());
+
+        Bag.transfer(this.bag, bag);
+        Bag oldBag = this.bag;
+        this.bag = bag;
+
+        return oldBag;
+
+    }
+
+    public void equip(Weapon weapon) {
+
+        Collectible item = (Collectible)weapon;
+        if(pullOut(item) != null) {
+
+            System.out.println(name + " pulls out " + item + " and equips it !");
+            this.weapon = weapon;
+
+        }
+
+    }
+
+    public void equip(Consumable consumable) {
+
+        Collectible item = (Collectible)consumable;
+        if(pullOut(item) != null) {
+
+            System.out.println(name + " pulls out " + item + " and equips it !");
+            this.consumable = consumable;
+
+        }
 
     }
 

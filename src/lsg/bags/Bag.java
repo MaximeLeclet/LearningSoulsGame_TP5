@@ -62,13 +62,25 @@ public class Bag {
         return items.contains(item);
     }
 
-    public Colleéctible[] getItems() {
+    public Collectible[] getItems() {
         return items.toArray(new Collectible[items.size()]);
     }
 
     public static void transfer(Bag from, Bag into) {
 
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        for(Collectible item : from.items) {
+
+            if(item.getWeight() <= (into.capacity - into.weight)) {
+
+                if(from.pop(item) != null) {
+
+                    into.push(item);
+
+                }
+
+            }
+
+        }
 
     }
 
