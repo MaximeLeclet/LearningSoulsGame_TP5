@@ -1,5 +1,6 @@
 package lsg.characters;
 
+import lsg.armor.ArmorItem;
 import lsg.bags.*;
 import lsg.consumables.Consumable;
 import lsg.consumables.drinks.Drink;
@@ -279,6 +280,53 @@ public abstract class Character {
             this.consumable = consumable;
 
         }
+
+    }
+
+    private Consumable fastUseFirst(Class<? extends Consumable> type) {
+
+        Collectible[] items = bag.getItems();
+
+        for(int i = 0; i < items.length; i++) {
+
+            if(items[i].getClass() == type) {
+
+                Consumable item = (Consumable)items[i];
+                item.use();
+                if(item.getCapacity() == 0) {
+
+                    bag.pop(item);
+
+                }
+
+                return item;
+
+            }
+
+        }
+
+        return null;
+
+    }
+
+    public Drink fastDrink() {
+
+        System.out.println(name + " drinks FAST :");
+        return (Drink)fastUseFirst(Drink.class);
+
+    }
+
+    public Food fastEat() {
+
+        System.out.println(name + " eats FAST :");
+        return (Food)fastUseFirst(Food.class);
+
+    }
+
+    public RepairKit fastRepair() {
+
+        System.out.println(name + " repairs FAST :");
+        return (RepairKit) fastUseFirst(RepairKit.class);
 
     }
 

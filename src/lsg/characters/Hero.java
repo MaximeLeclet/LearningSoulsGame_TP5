@@ -133,6 +133,20 @@ public class Hero extends Character {
 
     }
 
+    public void equip(ArmorItem item, int slot) {
+
+        System.out.println(this.getName() + " pulls out " + item + " and equips it !");
+        setArmorItem(item, slot);
+
+    }
+
+    public void equip(Ring ring, int slot) {
+
+        System.out.println(this.getName() + " pulls out " + ring + " and equips it !");
+        setRing(ring, slot);
+
+    }
+
     @Override
     public float computeProtection() {
         return getTotalArmor();
